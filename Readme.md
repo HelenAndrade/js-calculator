@@ -37,11 +37,11 @@ resultOnDisplay ( Boolean ): Indicates if the result is currently displayed.
 ## Functions
 ---------   
 
-inputValue(value: String | Number): Handles input values (numbers and operations) and updates the display accordingly.
-handleNumericInput(value: Number): Processes numeric inputs and updates displayValues[].
-handleOperationInput(value: String): Processes operation inputs and updates displayValues[].
-combineNumbers(last: Number, curr: Number): Combines the last number in displayValues[] with the current numeric input.
-clear(): Clears the display and resets the calculator state.
+✔inputValue(value: String | Number): Handles input values (numbers and operations) and updates the display accordingly.
+✔handleNumericInput(value: Number): Processes numeric inputs and updates displayValues[].
+✔handleOperationInput(value: String): Processes operation inputs and updates displayValues[].
+✔combineNumbers(last: Number, curr: Number): Combines the last number in displayValues[] with the current numeric input.
+✔clear(): Clears the display and resets the calculator state.
 eraseInput(): Removes the last input from the display.
 calculate(values: (String | Number)[]): Performs the calculation based on the current values in displayValues[] and returns the result.
 updateDisplay(): Updates the display with the current values in displayValues[].

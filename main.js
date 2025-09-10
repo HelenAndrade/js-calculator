@@ -1,4 +1,4 @@
-let displayValues = [0]; // (Number | String)[]
+let displayValues = [0, '+', 60, '-']; // (Number | String)[]
 //let currentInput = ''; // Number | String
 let result = 0; // Number
 let resultOnDisplay = false; // Boolean
@@ -9,7 +9,7 @@ let resultOnDisplay = false; // Boolean
 function inputValue(value) { // (Number | String)
     let typeOfValue = typeof(value);
     console.log('Display values '+ displayValues);
-    if (typeOfValue == "number") {
+    if (typeOfValue === "number") {
             handleNumericInput(value);
     } else if (typeOfValue == "string") {
             handleOperationInput(value);
@@ -17,12 +17,12 @@ function inputValue(value) { // (Number | String)
 }
 
 function handleNumericInput(value) { // (Number)
-    let lastInput = displayValues.at(-1), typeOfLastInput = typeof(lastInput); // Number | String
-    if (typeOfLastInput == "number") {
+    let lastInput = displayValues.at(-1); // Number | String
+    if (typeof(lastInput) === "number") {
         console.log('Tem valores no display e o anterior é um número');
         combineNumbers(lastInput, value);
         
-    } else if (typeof(lastInput) == "string") {
+    } else if (typeof(lastInput) === "string") {
         console.log('Tem valores no display e o anterior é uma operação');
         displayValues.push(value);    
         console.log(lastInput);
@@ -30,33 +30,60 @@ function handleNumericInput(value) { // (Number)
 }
 
 function combineNumbers(last, curr) { // (Numner)
-    let lastInput = displayValues.at(-1); // Number
     displayValues.pop();
-    if (last == 0) {
-        console.log('O ultimo numero é um 0');
+    if (last === 0) {
+        //console.log('O ultimo numero é um 0');
         displayValues.push(curr);
-        console.log(last);
     } else {
-        console.log('O ultimo numero NÃO é um 0');
-        displayValues.push(Number(lastInput + '' + curr));
-        console.log(lastInput);
+        //console.log('O ultimo numero NÃO é um 0');
+        displayValues.push(Number(last + '' + curr));
     }
-    // Garantir regras como: não deixar 0005, não aceitar mais de um . se já existir !!!?
+    // Garantir regras como: não aceitar mais de um . se já existir !!!?
 }
 
 function handleOperationInput(value) { // (String)
     let lastInput = displayValues.at(-1); // String
     if (typeof(lastInput) === "number") {
-        console.log('Tem valores no display e o anterior é um número');
+        //console.log('Tem valores no display e o anterior é um número');
         displayValues.push(value);    
-        console.log(lastInput);
     } else if (typeof(lastInput) === "string") {
-        console.log('Tem valores no display e o anterior é uma operação');
+        //console.log('Tem valores no display e o anterior é uma operação');
         displayValues.pop();
         displayValues.push(value);
-        console.log(lastInput);
     }
 }
 
-inputValue(5);
-console.log('Final display values '+ displayValues);
+function clear() {
+    displayValues = [0];
+    result = 0;
+    resultOnDisplay = false;
+}
+
+function eraseInput() {
+    let lastInput = displayValues.at(-1);
+    let lastInputSize = lastInput.toString().length;
+    let newValue = lastInput.toString().slice(0, -1);
+    let prevLength = displayValues.length;
+    displayValues.pop();
+    if (typeof(lastInput) === "number") {
+        if (prevLength === 1 && lastInputSize === 1) {
+            displayValues.push(0);
+            return;
+        } else if (prevLength > 1 && lastInputSize === 1) {
+            return;
+        } else if (lastInputSize > 1) {
+            displayValues.push(Number(newValue));
+            return;
+        }
+    } else return;
+} 
+
+/*
+console.log(displayValues);
+inputValue(Number('7' + '.5'));
+//eraseInput();
+
+
+console.log('Final display values ');
+console.log(displayValues);
+*/
