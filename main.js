@@ -1,4 +1,4 @@
-let displayValues = [0, '+', 60, '-']; // (Number | String)[]
+let displayValues = [0, '+', 60, '.', 9]; // (Number | String)[]
 //let currentInput = ''; // Number | String
 let result = 0; // Number
 let resultOnDisplay = false; // Boolean
@@ -8,7 +8,6 @@ let resultOnDisplay = false; // Boolean
 
 function inputValue(value) { // (Number | String)
     let typeOfValue = typeof(value);
-    console.log('Display values '+ displayValues);
     if (typeOfValue === "number") {
             handleNumericInput(value);
     } else if (typeOfValue == "string") {
@@ -19,37 +18,42 @@ function inputValue(value) { // (Number | String)
 function handleNumericInput(value) { // (Number)
     let lastInput = displayValues.at(-1); // Number | String
     if (typeof(lastInput) === "number") {
-        console.log('Tem valores no display e o anterior é um número');
         combineNumbers(lastInput, value);
         
     } else if (typeof(lastInput) === "string") {
-        console.log('Tem valores no display e o anterior é uma operação');
         displayValues.push(value);    
-        console.log(lastInput);
     };
 }
 
 function combineNumbers(last, curr) { // (Numner)
     displayValues.pop();
     if (last === 0) {
-        //console.log('O ultimo numero é um 0');
         displayValues.push(curr);
     } else {
-        //console.log('O ultimo numero NÃO é um 0');
         displayValues.push(Number(last + '' + curr));
     }
-    // Garantir regras como: não aceitar mais de um . se já existir !!!?
 }
 
 function handleOperationInput(value) { // (String)
     let lastInput = displayValues.at(-1); // String
     if (typeof(lastInput) === "number") {
-        //console.log('Tem valores no display e o anterior é um número');
         displayValues.push(value);    
     } else if (typeof(lastInput) === "string") {
-        //console.log('Tem valores no display e o anterior é uma operação');
+        checkDecimal(lastInput, value);
+    }
+}
+
+function checkDecimal(last, curr) { // (Number | String)
+    if (last !== '.' && curr !== '.'){
         displayValues.pop();
-        displayValues.push(value);
+        displayValues.push(curr);
+        return;
+    } else if (last !== '.' && curr === '.') {
+        return;
+    } else if (last === '.') {
+        displayValues.pop();
+        displayValues.push(curr);
+        return;
     }
 }
 
@@ -78,12 +82,9 @@ function eraseInput() {
     } else return;
 } 
 
-/*
-console.log(displayValues);
-inputValue(Number('7' + '.5'));
-//eraseInput();
 
+console.log(displayValues);
+inputValue('.');
 
 console.log('Final display values ');
 console.log(displayValues);
-*/
