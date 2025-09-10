@@ -1,0 +1,15 @@
+{
+  "name": "js-calculator",
+  "version": "1.0.0",
+  "description": "Calculator",
+  "main": "main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hélen Andrade",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^38.1.0"
+  }
+}
