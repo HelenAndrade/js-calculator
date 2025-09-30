@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self'; script-src 'self'"
+        />
+        <meta
+            http-equiv="X-Content-Security-Policy"
+            content="default-src 'self'; script-src 'self'"
+        >
+        <title>Calculator</title>
+        <link href="../src/output.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 id="text" class="bg-gray-200">Hello from Electron renderer!</h1>
+        <p>👋</p>
+        <button class="w-20 h-20 rounded-md cursor-pointer bg-amber-200">click</button>
+    </body>
+    <script src="./renderer.js"></script>
+</html>
